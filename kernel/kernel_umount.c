@@ -79,7 +79,7 @@ static int ksu_sys_umount(const char *mnt, int flags)
 
 #endif
 
-void try_umount(const char *mnt, int flags)
+static void try_umount(const char *mnt, int flags)
 {
 	struct path path;
 	int ret = 0;
@@ -100,7 +100,6 @@ void try_umount(const char *mnt, int flags)
 	}
 }
 
-#ifndef CONFIG_KSU_SUSFS_TRY_UMOUNT
 struct umount_tw {
 	struct callback_head cb;
 };
@@ -156,7 +155,6 @@ int ksu_handle_umount(uid_t old_uid, uid_t new_uid)
 
 	return 0;
 }
-#endif // #ifndef CONFIG_KSU_SUSFS_TRY_UMOUNT
 
 void ksu_kernel_umount_init(void)
 {
